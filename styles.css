@@ -133,3 +133,6 @@
 @media (prefers-reduced-motion:reduce){
   .fg-front,.fg-back,.fg-hit{transition:none}
 }
+.fg-b-desc {
+  white-space: pre-line;
+}
