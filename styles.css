@@ -45,6 +45,7 @@
   --fg-b-body-lh: 1.9;
   --fg-b-body-track: .03em;
   --fg-b-gap: 18px;
+  --fg-b-para-gap: 1em;   /* 描述文字段落之间的间距（默认随正文字号等比缩放） */
   --fg-b-hint-size: 12px;
   --fg-cx-size: 14px;
   --fg-cx-weight: 700;
@@ -126,13 +127,13 @@
   font-weight:var(--fg-b-body-weight);line-height:var(--fg-b-body-lh);
   letter-spacing:var(--fg-b-body-track);color:var(--fg-b-body-color);
   overflow-wrap:break-word;word-break:break-word}
+/* 描述段落：清除浏览器默认边距，段落之间留出明显的间距 */
+.fg-b-desc p{margin:0}
+.fg-b-desc p + p{margin-top:var(--fg-b-para-gap)}
 .fg-b-hint{position:absolute;bottom:14px;right:18px;
   font-family:var(--fg-font-cn);font-size:var(--fg-b-hint-size);color:var(--fg-b-hint-color)}
 
 /* 系统开启"减弱动态效果"时，关闭过渡动画（无障碍） */
 @media (prefers-reduced-motion:reduce){
   .fg-front,.fg-back,.fg-hit{transition:none}
-}
-.fg-b-desc {
-  white-space: pre-line;
 }

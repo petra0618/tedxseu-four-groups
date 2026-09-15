@@ -64,6 +64,7 @@
   v("--fg-b-body-lh", typo.backBodyLineHeight);
   v("--fg-b-body-track", typo.backBodyTracking);
   v("--fg-b-gap", (typo.backTitleGap || 18) + "px");
+  v("--fg-b-para-gap", typo.backParagraphGap !== undefined ? typo.backParagraphGap + "px" : undefined);
   v("--fg-b-hint-size", (typo.backHintSize || 12) + "px");
   v("--fg-cx-size", (typo.centerMarkSize || 14) + "px");
   v("--fg-cx-weight", typo.centerMarkWeight || 700);
@@ -146,7 +147,17 @@
     back.appendChild(tick);
     back.appendChild(el("div", "fg-b-title", g.title || ""));
     back.appendChild(el("div", "fg-b-en", g.english || ""));
-    back.appendChild(el("div", "fg-b-desc", g.description || ""));
+
+    /* 描述文字：按换行（\n 或 \n\n）拆成多个段落，每段一个 <p>。
+       换行以真实 DOM 段落呈现，不依赖 CSS white-space，任何浏览器表现一致；
+       描述中没有换行时仍是一段，显示与原来完全相同。 */
+    var desc = el("div", "fg-b-desc");
+    String(g.description || "").split(/\n+/).forEach(function (para) {
+      var t = para.trim();
+      if (t !== "") desc.appendChild(el("p", "fg-b-para", t));
+    });
+    back.appendChild(desc);
+
     back.appendChild(el("div", "fg-b-hint", texts.backHint !== undefined ? texts.backHint : "点击任意处返回"));
 
     back.addEventListener("click", function () { box.setAttribute("data-state", "front"); });
