@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101014">
+<link rel="icon" href="data:,">
+<title>TEDxSEU 四组介绍互动组件</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* 演示页样式（仅用于本页面，不属于组件本身） */
+  html,body{overflow-x:hidden}   /* 任何屏宽下都不出现横向滚动条 */
+  body{margin:0;background:#101014;min-height:100vh;min-height:100dvh;box-sizing:border-box;
+       padding:48px 12px 56px;display:flex;flex-direction:column;align-items:center;
+       font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+       -webkit-text-size-adjust:100%}
+  .demo-note{color:rgba(255,255,255,.5);font-size:12px;letter-spacing:.08em;
+             text-align:center;margin:16px 0;max-width:360px;line-height:1.8;
+             overflow-wrap:break-word}
+  .demo-note b{color:rgba(255,255,255,.85)}
+  .demo-stage{width:min(390px,100%)}
+</style>
+</head>
+<body>
+  <div class="demo-note"><b>点击四个区域</b>，查看每个组在做什么 · 进入后点击任意处返回</div>
+  <div class="demo-stage">
+    <div id="four-groups"></div>
+  </div>
+  <div class="demo-note">修改文字 / 颜色 / 字号 / X 粗细 → <b>config.js</b><br>使用与修改说明 → <b>README.md</b></div>
+  <script src="config.js"></script>
+  <script src="four-groups.js"></script>
+</body>
+</html>

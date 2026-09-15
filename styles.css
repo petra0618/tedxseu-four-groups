@@ -1,0 +1,135 @@
+/* =====================================================================
+   TEDxSEU 四组介绍互动组件 · styles.css
+   负责：结构与排版。
+   日常修改（文字/颜色/字号/粗细/间距）请使用 config.js；
+   只有需要改动布局结构本身时才编辑本文件。
+   ===================================================================== */
+
+:root{
+  /* 默认值（config.js 会覆盖这里的所有参数） */
+  --fg-w: 340px;
+  --fg-h: 340px;
+  --fg-bg: #0A0A0C;
+  --fg-x-color: #E62B1E;
+  --fg-x-width: 4px;
+  --fg-front: #FFFFFF;
+  --fg-e-color: rgba(255,255,255,.6);
+  --fg-cx-color: #FFFFFF;
+  --fg-hover: rgba(230,43,30,.10);
+  --fg-b-title-color: #FFFFFF;
+  --fg-b-en-color: rgba(255,255,255,.55);
+  --fg-b-body-color: rgba(255,255,255,.85);
+  --fg-b-hint-color: rgba(255,255,255,.45);
+  --fg-b-tick: #E62B1E;
+  --fg-b-pad: 28px;
+  --fg-font-cn: "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+  --fg-font-en: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  --fg-t-size: 16px;
+  --fg-t-weight: 700;
+  --fg-t-lh: 1.4;
+  --fg-t-track: 0em;
+  --fg-e-size: 11px;
+  --fg-e-weight: 700;
+  --fg-e-track: .18em;
+  --fg-label-gap: 6px;
+  --fg-b-title-size: 28px;
+  --fg-b-title-weight: 700;
+  --fg-b-title-lh: 1.3;
+  --fg-b-title-track: 0em;
+  --fg-b-en-size: 11px;
+  --fg-b-en-weight: 700;
+  --fg-b-en-track: .18em;
+  --fg-b-title-en-gap: 6px;
+  --fg-b-body-size: 15px;
+  --fg-b-body-weight: 400;
+  --fg-b-body-lh: 1.9;
+  --fg-b-body-track: .03em;
+  --fg-b-gap: 18px;
+  --fg-b-hint-size: 12px;
+  --fg-cx-size: 14px;
+  --fg-cx-weight: 700;
+}
+
+#four-groups{display:flex;justify-content:center}
+
+/* ---------- 组件主体（正方形，随容器等比缩放，不变形） ---------- */
+.fg-box{
+  position:relative;
+  width:var(--fg-w);
+  height:var(--fg-h);
+  max-width:100%;
+  background:var(--fg-bg);
+  overflow:hidden;
+}
+/* 支持 aspect-ratio 的浏览器（iOS Safari 15+ / Android Chrome 88+）：
+   高度自动跟随宽度，任何屏宽下都保持正方形，不溢出、不变形 */
+@supports (aspect-ratio:1/1){
+  .fg-box{height:auto;aspect-ratio:1/1}
+}
+
+/* ---------- X 线与点击区域 ---------- */
+.fg-xsvg{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.fg-xsvg line{stroke:var(--fg-x-color);stroke-width:var(--fg-x-width);
+  pointer-events:none}   /* X 线不参与点击，点击范围完全由四个三角形决定 */
+.fg-hit{fill:transparent;stroke:transparent;stroke-width:1.5;cursor:pointer;
+  touch-action:manipulation;outline:none;
+  transition:fill .2s ease,stroke .2s ease}
+/* 悬停提示仅在桌面端生效（手机没有 hover，交互也不依赖 hover） */
+@media (hover:hover){
+  .fg-hit:hover{fill:var(--fg-hover);stroke:var(--fg-x-color)}
+}
+.fg-hit:active{fill:var(--fg-hover);stroke:var(--fg-x-color)}  /* 手机按下的瞬间反馈 */
+.fg-hit:focus-visible{stroke:var(--fg-x-color)}
+.fg-box:not([data-state="front"]) .fg-hit{pointer-events:none;cursor:default}
+
+/* ---------- 前面：四组标签 ---------- */
+.fg-front{position:absolute;inset:0;z-index:2;pointer-events:none;transition:opacity .25s ease}
+.fg-box:not([data-state="front"]) .fg-front{opacity:0}
+.fg-lab{position:absolute;display:flex;flex-direction:column;gap:var(--fg-label-gap);color:var(--fg-front)}
+.fg-lab .fg-cn{font-family:var(--fg-font-cn);font-size:var(--fg-t-size);
+  font-weight:var(--fg-t-weight);line-height:var(--fg-t-lh);
+  letter-spacing:var(--fg-t-track);overflow-wrap:break-word}
+.fg-lab .fg-en{font-family:var(--fg-font-en);font-size:var(--fg-e-size);
+  font-weight:var(--fg-e-weight);
+  letter-spacing:var(--fg-e-track);text-transform:uppercase;color:var(--fg-e-color);
+  overflow-wrap:break-word}
+.fg-lab-top{top:14%;left:50%;transform:translateX(-50%);align-items:center;text-align:center;max-width:62%}
+.fg-lab-bottom{bottom:14%;left:50%;transform:translateX(-50%);align-items:center;text-align:center;max-width:62%}
+.fg-lab-left{left:3.5%;top:50%;transform:translateY(-50%);align-items:flex-start;text-align:left;max-width:38%}
+.fg-lab-right{right:3.5%;top:50%;transform:translateY(-50%);align-items:flex-end;text-align:right;max-width:38%}
+.fg-cx{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:var(--fg-font-en);font-weight:var(--fg-cx-weight);
+  font-size:var(--fg-cx-size);color:var(--fg-cx-color);line-height:1}
+
+/* ---------- 背面：组详情 ---------- */
+.fg-back{position:absolute;inset:0;z-index:3;background:var(--fg-bg);
+  display:flex;flex-direction:column;padding:var(--fg-b-pad);
+  cursor:pointer;touch-action:manipulation;opacity:0;transform:translateY(6px);
+  transition:opacity .25s ease,transform .25s ease;pointer-events:none;overflow:hidden}
+.fg-box[data-state="talker"]   .fg-back[data-g="talker"],
+.fg-box[data-state="editor"]   .fg-back[data-g="editor"],
+.fg-box[data-state="designer"] .fg-back[data-g="designer"],
+.fg-box[data-state="outreach"] .fg-back[data-g="outreach"]{
+  opacity:1;transform:none;pointer-events:auto}
+.fg-tick{position:absolute;top:14px;left:14px;width:18px;height:18px}
+.fg-tick path{stroke:var(--fg-b-tick);fill:none}
+.fg-b-title{font-family:var(--fg-font-cn);font-size:var(--fg-b-title-size);
+  font-weight:var(--fg-b-title-weight);line-height:var(--fg-b-title-lh);
+  letter-spacing:var(--fg-b-title-track);color:var(--fg-b-title-color);
+  overflow-wrap:break-word}
+.fg-b-en{font-family:var(--fg-font-en);font-size:var(--fg-b-en-size);
+  font-weight:var(--fg-b-en-weight);
+  letter-spacing:var(--fg-b-en-track);text-transform:uppercase;color:var(--fg-b-en-color);
+  margin-top:var(--fg-b-title-en-gap);overflow-wrap:break-word}
+.fg-b-desc{flex:1;min-height:0;overflow-y:auto;margin-top:var(--fg-b-gap);
+  font-family:var(--fg-font-cn);font-size:var(--fg-b-body-size);
+  font-weight:var(--fg-b-body-weight);line-height:var(--fg-b-body-lh);
+  letter-spacing:var(--fg-b-body-track);color:var(--fg-b-body-color);
+  overflow-wrap:break-word;word-break:break-word}
+.fg-b-hint{position:absolute;bottom:14px;right:18px;
+  font-family:var(--fg-font-cn);font-size:var(--fg-b-hint-size);color:var(--fg-b-hint-color)}
+
+/* 系统开启"减弱动态效果"时，关闭过渡动画（无障碍） */
+@media (prefers-reduced-motion:reduce){
+  .fg-front,.fg-back,.fg-hit{transition:none}
+}

@@ -1,0 +1,103 @@
+// =====================================================================
+//  TEDxSEU 四组介绍互动组件 · config.js
+//
+//  这是唯一需要日常修改的文件：
+//  文字内容、颜色、尺寸、字体、字号、字重、行高、字间距，全部都在这里。
+//  保存后刷新 index.html 即可看到效果，不需要改动其他任何文件。
+//
+//  颜色规范取自原推文设计系统：
+//    黑 #0A0A0C（--ink）· 红 #E62B1E（--red）
+// =====================================================================
+
+window.FOUR_GROUPS_CONFIG = {
+
+  /* ================= 一、四组文案 ================= */
+  /* 想改哪句话，直接改引号里的文字即可（引号保留）。
+     文字可以任意加长、换行，组件会自动换行、不会截断。 */
+  groups: {
+    talker: {
+      title: "嘉宾组",
+      english: "TALKER ASSISTANT",
+      description: "联系讲者、沟通选题、协助打磨一场演讲。适合喜欢跟人打交道、愿意把可能的拒绝变成下一次机会的人。"
+    },
+    editor: {
+      title: "编辑组",
+      english: "EDITOR",
+      description: "选题、文案、公众号内容与排版。适合对文字敏感、愿意把一个想法写到别人能看懂的人。"
+    },
+    designer: {
+      title: "设计组",
+      english: "DESIGNER",
+      description: "海报、推文视觉、大会物料。适合相信“好看也是一种表达”、愿意反复打磨一张图的人。"
+    },
+    outreach: {
+      title: "社群组",
+      english: "OUTREACHER",
+      description: "社群运营、活动执行、现场统筹。适合喜欢把事落在地上、让每场活动顺利发生的人。"
+    }
+  },
+
+  /* ================= 二、颜色 ================= */
+  colors: {
+    background: "#0A0A0C",                  // 组件背景（黑）
+    xColor: "#E62B1E",                      // X 的颜色（TEDx 红，取自原推文 --red）
+    frontText: "#FFFFFF",                   // 四组中文标签颜色
+    frontEnglish: "rgba(255,255,255,0.6)",  // 四组英文标签颜色
+    centerMark: "#FFFFFF",                  // 中心 X 字符颜色
+    hoverFill: "rgba(230,43,30,0.10)",      // 点击区域悬停/按压提示填充
+    backTitle: "#FFFFFF",                   // 背面中文组名颜色
+    backEnglish: "rgba(255,255,255,0.55)",  // 背面英文颜色
+    backBody: "rgba(255,255,255,0.85)",     // 背面介绍正文颜色
+    backHint: "rgba(255,255,255,0.45)",     // 返回提示颜色
+    backTick: "#E62B1E"                     // 背面红色角标颜色
+  },
+
+  /* ================= 三、尺寸 ================= */
+  size: {
+    width: 340,        // 组件宽度（px）——组件大小主要由这里决定
+    height: 340,       // 兜底高度（px）：现代浏览器会自动保持正方形，此值仅作兜底，请与 width 保持一致
+    xInset: 0,         // X 相对边框的内缩百分比（0–49），0 = 顶角到顶角
+    xLineWidth: 4,     // X 的粗细（px）。数字越大越粗
+    backPadding: 28    // 背面文字区域的内边距（px）
+  },
+
+  /* ================= 四、字体与排版 ================= */
+  typography: {
+    fontCN: '"PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif',
+    fontEN: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+
+    frontTitleSize: 16,         // 前面中文组名字号（px）
+    frontTitleWeight: 700,      // 前面中文组名字重
+    frontTitleLineHeight: 1.4,  // 前面中文组名行高
+    frontTitleTracking: "0em",  // 前面中文组名字间距
+    frontEnglishSize: 11,       // 前面英文组名字号（px）
+    frontEnglishWeight: 700,    // 前面英文组名字重
+    frontEnglishTracking: "0.18em",  // 前面英文字间距
+    frontLabelGap: 6,           // 前面中文与英文标签之间的距离（px）
+
+    backTitleSize: 28,          // 背面中文组名字号（px）
+    backTitleWeight: 700,       // 背面中文组名字重
+    backTitleLineHeight: 1.3,   // 背面中文组名行高
+    backTitleTracking: "0em",   // 背面中文组名字间距
+    backEnglishSize: 11,        // 背面英文字号（px）
+    backEnglishWeight: 700,     // 背面英文字重
+    backEnglishTracking: "0.18em",   // 背面英文字间距
+    backTitleEnglishGap: 6,     // 背面中文组名与英文之间的距离（px）
+
+    backBodySize: 15,           // 背面介绍正文字号（px）——想把正文变大就改这里
+    backBodyWeight: 400,        // 背面介绍正文字重
+    backBodyLineHeight: 1.9,    // 背面介绍正文行距
+    backBodyTracking: "0.03em", // 背面介绍正文字间距
+    backTitleGap: 18,           // 背面标题与正文之间的距离（px）
+
+    backHintSize: 12,           // 返回提示字号（px）
+    centerMarkSize: 14,         // 中心 X 字符字号（px）
+    centerMarkWeight: 700       // 中心 X 字符字重
+  },
+
+  /* ================= 五、其他文字 ================= */
+  texts: {
+    centerMark: "X",              // 中心字符：字母 X（任何手机都渲染一致；也可改成 "✕" 或 "" 隐藏）
+    backHint: "点击任意处返回"      // 返回提示文字
+  }
+};
