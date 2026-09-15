@@ -121,12 +121,14 @@
   font-weight:var(--fg-b-en-weight);
   letter-spacing:var(--fg-b-en-track);text-transform:uppercase;color:var(--fg-b-en-color);
   margin-top:var(--fg-b-title-en-gap);overflow-wrap:break-word}
+/* 正文区：自然换行；文字较多时区域内滚动，绝不破坏外部 X 结构 */
 .fg-b-desc{flex:1;min-height:0;overflow-y:auto;margin-top:var(--fg-b-gap);
+  padding-bottom:8px;   /* 给右下角"返回"提示留出呼吸空间 */
   font-family:var(--fg-font-cn);font-size:var(--fg-b-body-size);
   font-weight:var(--fg-b-body-weight);line-height:var(--fg-b-body-lh);
   letter-spacing:var(--fg-b-body-track);color:var(--fg-b-body-color);
   overflow-wrap:break-word;word-break:break-word}
-/* 描述段落：每段正常显示，段落之间留 12px 间距，最后一段不留底部空白 */
+/* 描述段落：每段（工作内容/要求）都是独立的 <p>，段落之间留 12px，末段无多余空白 */
 .fg-b-para{margin:0 0 12px}
 .fg-b-para:last-child{margin-bottom:0}
 .fg-b-hint{position:absolute;bottom:14px;right:18px;

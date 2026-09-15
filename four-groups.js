@@ -64,7 +64,6 @@
   v("--fg-b-body-lh", typo.backBodyLineHeight);
   v("--fg-b-body-track", typo.backBodyTracking);
   v("--fg-b-gap", (typo.backTitleGap || 18) + "px");
-  v("--fg-b-para-gap", typo.backParagraphGap !== undefined ? typo.backParagraphGap + "px" : undefined);
   v("--fg-b-hint-size", (typo.backHintSize || 12) + "px");
   v("--fg-cx-size", (typo.centerMarkSize || 14) + "px");
   v("--fg-cx-weight", typo.centerMarkWeight || 700);
@@ -119,7 +118,7 @@
   });
   box.appendChild(svg);
 
-  /* 前面：四个标签 + 中心 ✕ */
+  /* 前面：四个标签 + 中心 X */
   var front = el("div", "fg-front");
   var LAB_CLASSES = { talker: "fg-lab-top", editor: "fg-lab-right", designer: "fg-lab-left", outreach: "fg-lab-bottom" };
   REGIONS.forEach(function (r) {
@@ -148,9 +147,10 @@
     back.appendChild(el("div", "fg-b-title", g.title || ""));
     back.appendChild(el("div", "fg-b-en", g.english || ""));
 
-    /* 描述文字：按换行（\n 或 \n\n）拆成多个段落，每段一个 <p>。
-       换行以真实 DOM 段落呈现，不依赖 CSS white-space，任何浏览器表现一致；
-       描述中没有换行时仍是一段，显示与原来完全相同。 */
+    /* 介绍文字：按 \n 或 \n\n 拆成多个段落，每段生成一个独立的
+       <p class="fg-b-para">（例如「工作内容」与「要求」是两个 <p>，
+       要求永远从新的一行开始）。这是真实的 DOM 段落，
+       不依赖 CSS white-space，任何浏览器表现一致。 */
     var desc = el("div", "fg-b-desc");
     String(g.description || "").split(/\n+/).forEach(function (para) {
       var t = para.trim();
